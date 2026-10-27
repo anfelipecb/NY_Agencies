@@ -1,0 +1,1669 @@
+{
+  "meta": {
+    "fiscalYear": 2026,
+    "window": "July 1, 2025 to June 30, 2026",
+    "order": "Executive Order 23, September 8, 2026",
+    "source": "Mayor's Management Report agency resources, NYC Open Data 4qmi-txnk",
+    "disclaimer": "Public figures for a first reading. Not an audit, and not the adopted budget."
+  },
+  "portfolios": [
+    {
+      "id": "fdm",
+      "label": "First Deputy Mayor",
+      "blurb": "Police, public schools, correction, probation, finance, and business integrity. Liaison to CUNY, the Civilian Complaint Review Board, and the School Construction Authority."
+    },
+    {
+      "id": "operations",
+      "label": "Deputy Mayor for Operations",
+      "blurb": "Sanitation, streets, water, parks, fire, emergency management, design and construction, citywide administration, records, and technology."
+    },
+    {
+      "id": "hhs",
+      "label": "Deputy Mayor for Health and Human Services",
+      "blurb": "Health, benefits, child welfare, shelter, aging, youth, veterans, and the medical examiner. Homeless Services and HRA sit inside Social Services. Liaison to Health + Hospitals."
+    },
+    {
+      "id": "housing",
+      "label": "Deputy Mayor for Housing and Planning",
+      "blurb": "Buildings, city planning, housing preservation and development, and landmarks. Liaison to NYCHA."
+    },
+    {
+      "id": "economic",
+      "label": "Deputy Mayor for Economic Justice",
+      "blurb": "Human rights, consumer and worker protection, cultural affairs, small business, taxis, and the Economic Development Corporation. Libraries are a liaison, not a named agency."
+    },
+    {
+      "id": "counsel",
+      "label": "Chief Counsel",
+      "blurb": "Administrative hearings at OATH. Liaison to Investigation and the Law Department, whose leaders also report to the Mayor."
+    },
+    {
+      "id": "staff",
+      "label": "Chief of Staff",
+      "blurb": "Elections, as a liaison. 311 is placed here because the Mayor's Office of Operations reports to the Chief of Staff. The order does not name 311."
+    },
+    {
+      "id": "safety",
+      "label": "Deputy Mayor for Community Safety",
+      "blurb": "No chapter of its own in the Mayor's Management Report. B-HEARD is operated by Fire and Health + Hospitals."
+    }
+  ],
+  "agencies": [
+    {
+      "id": "DOE",
+      "acronym": "DOE",
+      "name": "New York City Public Schools",
+      "portfolio": "fdm",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": true,
+      "parent": null,
+      "oneLiner": "The city school system. Executive Order 23 calls it New York City Public Schools and says that is officially the Department of Education.",
+      "about": "It runs public schools from pre-K through high school, plus central offices that hire teachers, buy services, and move students. It is the largest agency in the city on both spending and headcount.",
+      "reportingNote": "Executive Order 23 says the First Deputy Mayor supervises and coordinates this agency. Section 12 also says the Chancellor reports directly to the Mayor.",
+      "expendituresMillions": 37709.6,
+      "authorizedMillions": 36897.6,
+      "positions": {
+        "actual": 152698,
+        "authorized": 155238,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 21.8,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 26.7,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": 2443.5,
+      "watch": "Almost every other agency is a rounding error next to this one. A single citywide total hides the difference between schools and the central office.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "HRA",
+      "acronym": "HRA",
+      "name": "Human Resources Administration",
+      "portfolio": "hhs",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": "Department of Social Services",
+      "oneLiner": "Cash assistance, SNAP, and Medicaid administration for New Yorkers who qualify.",
+      "about": "HRA is the benefits side of the Department of Social Services. The work is eligibility, case processing, and payments, much of it through contracts and other governments' rules.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Health and Human Services supervises and coordinates this agency. The order names the Department of Social Services, and says that department includes Homeless Services and the Human Resources Administration.",
+      "expendituresMillions": 14685.9,
+      "authorizedMillions": 14204.5,
+      "positions": {
+        "actual": 10747,
+        "authorized": 12525,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 41.6,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 72.7,
+      "capitalMillions": 48.2,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": 1128.2,
+      "watch": "Second-largest expenditure line in the report, with 10,747 positions against 12,525 authorized. Most of the dollars are benefits, not city payroll.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "NYCHH",
+      "acronym": "H+H",
+      "name": "NYC Health + Hospitals",
+      "portfolio": "hhs",
+      "tie": "liaison",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "The public hospital and clinic system, including the system's role in B-HEARD mental-health responses.",
+      "about": "Health + Hospitals is a public benefit corporation, not a mayoral department. The Deputy Mayor for Health and Human Services keeps the liaison. Spending here is the system's own books.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Health and Human Services maintains a liaison with this agency. A liaison is not day-to-day supervision.",
+      "expendituresMillions": 13189.9,
+      "authorizedMillions": 12092.1,
+      "positions": {
+        "actual": 47236,
+        "authorized": 46917,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 291.4,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 13973.8,
+      "capitalMillions": 259.6,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Reported spending is $13.2 billion against a $12.1 billion authorized figure, with $291 million in overtime. Patient revenue, not tax levy, is most of the money.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Bring in the authority's own financial statement. This MMR row is not the whole enterprise."
+      ]
+    },
+    {
+      "id": "NYPD",
+      "acronym": "NYPD",
+      "name": "New York City Police Department",
+      "portfolio": "fdm",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": true,
+      "parent": null,
+      "oneLiner": "Patrol, investigations, and the police response to 911.",
+      "about": "The First Deputy Mayor supervises the department, and Section 12 of the same order says the commissioner reports directly to the Mayor. Uniformed and civilian staff are published as separate rows.",
+      "reportingNote": "Executive Order 23 says the First Deputy Mayor supervises and coordinates this agency. Section 12 also says the Commissioner reports directly to the Mayor.",
+      "expendituresMillions": 6909.1,
+      "authorizedMillions": 6893.3,
+      "positions": {
+        "actual": 48344,
+        "authorized": 50573,
+        "lines": [
+          {
+            "label": "Uniformed",
+            "sourceLabel": "Personnel (uniformed)",
+            "actual": 34018,
+            "authorized": 35025
+          },
+          {
+            "label": "Civilian",
+            "sourceLabel": "Personnel (civilian)",
+            "actual": 14326,
+            "authorized": 15548
+          }
+        ],
+        "note": "Headline adds the civilian and uniformed rows.",
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 965.7,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 94.0,
+      "capitalMillions": 379.3,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Overtime was $966 million, about 14 percent of expenditures. That is one number for the whole department. It does not say whether the cost sits in patrol, investigations, or events.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Break overtime out by unit before treating it as one department-wide number."
+      ]
+    },
+    {
+      "id": "NYCHA",
+      "acronym": "NYCHA",
+      "name": "New York City Housing Authority",
+      "portfolio": "housing",
+      "tie": "liaison",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Public housing and the city's Section 8 voucher program.",
+      "about": "NYCHA is an authority. The Deputy Mayor for Housing and Planning reviews it. The Deputy Mayor does not supervise it the way a commissioner is supervised. Federal subsidy is inside these figures.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Housing and Planning maintains a liaison with this agency. A liaison is not day-to-day supervision.",
+      "expendituresMillions": 5600.9,
+      "authorizedMillions": 5568.8,
+      "positions": {
+        "actual": 11612,
+        "authorized": 12265,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 195.7,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 5559.5,
+      "capitalMillions": 755.1,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Spending and revenue are almost the same size, about $5.6 billion, with $196 million in overtime. City tax-levy money is only a slice of that.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Bring in the authority's own financial statement. This MMR row is not the whole enterprise."
+      ]
+    },
+    {
+      "id": "DHS",
+      "acronym": "DHS",
+      "name": "Department of Homeless Services",
+      "portfolio": "hhs",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": "Department of Social Services",
+      "oneLiner": "Shelter and rehousing for people who are homeless.",
+      "about": "DHS is the shelter side of the Department of Social Services, paired with HRA in Executive Order 23. The department's own headcount is small relative to the shelter system it pays for.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Health and Human Services supervises and coordinates this agency. The order names the Department of Social Services, and says that department includes Homeless Services and the Human Resources Administration.",
+      "expendituresMillions": 4480.3,
+      "authorizedMillions": 4420.9,
+      "positions": {
+        "actual": 1620,
+        "authorized": 2206,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 13.8,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": null,
+      "capitalMillions": 39.5,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": 4081.3,
+      "watch": "Human-services contracts are $4.1 billion of $4.5 billion in expenditures. Headcount is 1,620 against 2,206 authorized. The cost driver is the shelter system, not city payroll.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Split the human-services contract budget by program. The total is too large to be the last word."
+      ]
+    },
+    {
+      "id": "ACS",
+      "acronym": "ACS",
+      "name": "Administration for Children's Services",
+      "portfolio": "hhs",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Child protection, foster care, juvenile justice, and a large share of early child care.",
+      "about": "ACS investigates abuse and neglect, places children in foster care, and runs juvenile justice. Contracted providers do much of the day-to-day care.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Health and Human Services supervises and coordinates this agency.",
+      "expendituresMillions": 4431.0,
+      "authorizedMillions": 3832.1,
+      "positions": {
+        "actual": 6514,
+        "authorized": 7114,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 39.2,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 8.8,
+      "capitalMillions": 92.1,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": 2962.3,
+      "watch": "Spending of $4.4 billion sits well above the $3.8 billion authorized figure in the same table. Read both before calling either one the budget.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Split the human-services contract budget by program. The total is too large to be the last word."
+      ]
+    },
+    {
+      "id": "FDNY",
+      "acronym": "FDNY",
+      "name": "Fire Department",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Firefighting and emergency medical response, including the Fire side of B-HEARD.",
+      "about": "The department sits with Operations. B-HEARD, the mental-health response that pairs Fire EMTs with Health + Hospitals clinicians, is coordinated by the Deputy Mayor for Community Safety.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 2842.8,
+      "authorizedMillions": 2821.6,
+      "positions": {
+        "actual": 16917,
+        "authorized": 17615,
+        "lines": [
+          {
+            "label": "Uniformed",
+            "sourceLabel": "Personnel (uniformed)",
+            "actual": 10888,
+            "authorized": 11294
+          },
+          {
+            "label": "Civilian",
+            "sourceLabel": "Personnel (civilian)",
+            "actual": 6029,
+            "authorized": 6321
+          }
+        ],
+        "note": "Headline adds the civilian and uniformed rows.",
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 564.0,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 134.7,
+      "capitalMillions": 171.8,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Overtime was $564 million, about 20 percent of expenditures. That share is the number to understand before treating the department as a flat headcount story.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Break overtime out by unit before treating it as one department-wide number."
+      ]
+    },
+    {
+      "id": "DOHMH",
+      "acronym": "DOHMH",
+      "name": "Department of Health and Mental Hygiene",
+      "portfolio": "hhs",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Disease control, restaurant inspections, mental health, and the city's vital records.",
+      "about": "The department is the public-health authority. Clinics and hospitals are mostly Health + Hospitals. This agency sets rules, runs programs, and contracts for care.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Health and Human Services supervises and coordinates this agency.",
+      "expendituresMillions": 2840.2,
+      "authorizedMillions": 2907.9,
+      "positions": {
+        "actual": 6418,
+        "authorized": 7435,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 21.0,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 36.4,
+      "capitalMillions": 308.5,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": 1301.8,
+      "watch": "About $1.3 billion of the $2.8 billion is the human-services contract budget. Authorized positions are 7,435 against 6,418 filled in this table.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Split the human-services contract budget by program. The total is too large to be the last word."
+      ]
+    },
+    {
+      "id": "DSNY",
+      "acronym": "DSNY",
+      "name": "Department of Sanitation",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Trash and recycling collection, street cleaning, and snow removal.",
+      "about": "Sanitation is the most visible daily operation in the Operations portfolio. Uniformed sanitation workers and civilian staff are separate rows.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 2361.1,
+      "authorizedMillions": 2249.0,
+      "positions": {
+        "actual": 10103,
+        "authorized": 9903,
+        "lines": [
+          {
+            "label": "Uniformed",
+            "sourceLabel": "Personnel (uniformed)",
+            "actual": 8403,
+            "authorized": 7957
+          },
+          {
+            "label": "Civilian",
+            "sourceLabel": "Personnel (civilian)",
+            "actual": 1700,
+            "authorized": 1946
+          }
+        ],
+        "note": "Headline adds the civilian and uniformed rows.",
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 322.7,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 21.1,
+      "capitalMillions": 395.8,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Overtime was $323 million, about 14 percent of spending. Uniformed actual headcount, 8,403, is above the 7,957 authorized uniformed figure. That is not a vacancy.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Break overtime out by unit before treating it as one department-wide number."
+      ]
+    },
+    {
+      "id": "HPD",
+      "acronym": "HPD",
+      "name": "Department of Housing Preservation and Development",
+      "portfolio": "housing",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Code enforcement, preservation of existing housing, and financing of new affordable homes.",
+      "about": "HPD is the city's housing agency. The expense budget pays staff and programs. The homes themselves show up mainly as capital commitments and as deals with private and nonprofit partners.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Housing and Planning supervises and coordinates this agency.",
+      "expendituresMillions": 2041.8,
+      "authorizedMillions": 2023.1,
+      "positions": {
+        "actual": 2498,
+        "authorized": 2891,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 4.3,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 160.5,
+      "capitalMillions": 3129.4,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Capital commitments are $3.1 billion, larger than the $2.0 billion expense line. An expense-only card understates what the agency is doing.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Show capital projects beside expense, by who the project is for."
+      ]
+    },
+    {
+      "id": "DCAS",
+      "acronym": "DCAS",
+      "name": "Department of Citywide Administrative Services",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "City buildings, the fleet, civil-service exams, and shared goods and services for other agencies.",
+      "about": "A large share of this budget is spent on behalf of the rest of government: leases, energy, supplies, and vehicles. It is not the cost of a back office alone.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 1981.4,
+      "authorizedMillions": 1845.9,
+      "positions": {
+        "actual": 2139,
+        "authorized": 2598,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 23.3,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 69.3,
+      "capitalMillions": 106.9,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Spending is $2.0 billion with 2,139 positions. Treat the dollars as citywide shared services until the units of appropriation are split out.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DEP",
+      "acronym": "DEP",
+      "name": "Department of Environmental Protection",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Drinking water, sewers, and wastewater treatment.",
+      "about": "DEP runs the water system from the upstate watershed to the treatment plants. Water and sewer charges, which pay for most of the system, are not the small revenue figure that appears under a stray indicator name in this file, so that figure is left off the card.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 1911.9,
+      "authorizedMillions": 1890.3,
+      "positions": {
+        "actual": 5811,
+        "authorized": 6547,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 48.2,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": null,
+      "capitalMillions": 2859.1,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Capital commitments are $2.9 billion, above the $1.9 billion expense line. The operating card is the staff and the plants, not the construction program.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Show capital projects beside expense, by who the project is for."
+      ]
+    },
+    {
+      "id": "CUNY",
+      "acronym": "CUNY",
+      "name": "City University of New York",
+      "portfolio": "fdm",
+      "tie": "liaison",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "The city's public university system. Community colleges are a city relationship. Senior colleges are also a state one.",
+      "about": "Executive Order 23 gives the First Deputy Mayor a liaison, not supervision. The MMR expenditure is the city's reported support, not CUNY's full budget.",
+      "reportingNote": "Executive Order 23 says the First Deputy Mayor maintains a liaison with this agency. A liaison is not day-to-day supervision.",
+      "expendituresMillions": 1643.6,
+      "authorizedMillions": 1627.8,
+      "positions": {
+        "actual": 8148,
+        "authorized": 9379,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 4.2,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 249.4,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "The table shows $1.6 billion and 8,148 positions. State funds and tuition sit outside this city line.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Bring in the authority's own financial statement. This MMR row is not the whole enterprise."
+      ]
+    },
+    {
+      "id": "DOT",
+      "acronym": "DOT",
+      "name": "Department of Transportation",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Streets, bridges, sidewalks, ferries, and the city's side of bus lanes and Vision Zero.",
+      "about": "DOT controls the street. The MTA runs the subways and most buses. Paving, signals, and bridges are largely capital work, so the expense line is only part of the agency.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 1583.8,
+      "authorizedMillions": 1569.6,
+      "positions": {
+        "actual": 5905,
+        "authorized": 6260,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 64.8,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 471.4,
+      "capitalMillions": 2096.6,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Capital commitments are $2.1 billion, above $1.6 billion of expense. Revenue in the table is $471 million, mostly parking and concessions, not a farebox.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Show capital projects beside expense, by who the project is for."
+      ]
+    },
+    {
+      "id": "DYCD",
+      "acronym": "DYCD",
+      "name": "Department of Youth and Community Development",
+      "portfolio": "hhs",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "After-school, summer, and community programs, mostly delivered by nonprofits.",
+      "about": "DYCD designs and pays for youth programs. It does not employ the instructors in those programs. That is why the budget is large and the city headcount is not.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Health and Human Services supervises and coordinates this agency.",
+      "expendituresMillions": 1525.8,
+      "authorizedMillions": 1548.3,
+      "positions": {
+        "actual": 711,
+        "authorized": 753,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.153,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": 1311.8,
+      "watch": "Human-services contracts are $1.3 billion of $1.5 billion in spending, with 711 city positions. Efficiency here is contract design, not overtime.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Split the human-services contract budget by program. The total is too large to be the last word."
+      ]
+    },
+    {
+      "id": "DOC",
+      "acronym": "DOC",
+      "name": "Department of Correction",
+      "portfolio": "fdm",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "City jails, including Rikers Island, during the long move to borough-based jails.",
+      "about": "The First Deputy Mayor supervises Correction. A separate office coordinates the borough-based jails transition. That office has no MMR chapter of its own.",
+      "reportingNote": "Executive Order 23 says the First Deputy Mayor supervises and coordinates this agency.",
+      "expendituresMillions": 1379.9,
+      "authorizedMillions": 1400.5,
+      "positions": {
+        "actual": 7361,
+        "authorized": 8893,
+        "lines": [
+          {
+            "label": "Uniformed",
+            "sourceLabel": "Personnel (uniformed)",
+            "actual": 5702,
+            "authorized": 7060
+          },
+          {
+            "label": "Civilian",
+            "sourceLabel": "Personnel (civilian)",
+            "actual": 1659,
+            "authorized": 1833
+          }
+        ],
+        "note": "Headline adds the civilian and uniformed rows.",
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 369.1,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 12.8,
+      "capitalMillions": 2153.3,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Overtime was $369 million, about 27 percent of expenditures. Uniformed staff are 5,702 against 7,060 authorized. Capital commitments for the jail program are $2.2 billion, larger than the expense budget.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Show capital projects beside expense, by who the project is for."
+      ]
+    },
+    {
+      "id": "OTI",
+      "acronym": "OTI",
+      "name": "Office of Technology and Innovation",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Citywide technology, cybersecurity, and the systems behind 311 and many agency applications.",
+      "about": "OTI consolidates what used to be separate technology shops. Its budget buys staff, vendors, and licenses that other agencies use.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 982.6,
+      "authorizedMillions": 967.2,
+      "positions": {
+        "actual": 1499,
+        "authorized": 1580,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 2.724,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 131.4,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "Overtime is published in thousands of dollars, $2.7 million, not millions. Reading the raw 2,724 as millions would invent a crisis.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DPR",
+      "acronym": "DPR",
+      "name": "Department of Parks and Recreation",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Parks, playgrounds, recreation centers, and the street trees the city plants and prunes.",
+      "about": "Parks work is seasonal. The MMR headcount therefore mixes full-time staff with full-time equivalents, including part-year jobs.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 724.2,
+      "authorizedMillions": 709.9,
+      "positions": {
+        "actual": 7271,
+        "authorized": 8144,
+        "lines": [
+          {
+            "label": "Of which, FTE",
+            "sourceLabel": "Full-time equivalent (FTE) personnel",
+            "actual": 2429,
+            "authorized": 3002
+          }
+        ],
+        "note": "The headline is the MMR row Personnel (Total FT and FTE). The FTE row is included in that total, not added to it.",
+        "comparable": false
+      },
+      "overtime": {
+        "millions": 18.4,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 92.9,
+      "capitalMillions": 660.9,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "The headline headcount, 7,271, includes full-time equivalents. Do not rank it against a full-time-only agency. Capital commitments are $661 million, close to the whole expense budget.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line.",
+        "Publish a full-time-only headcount so Parks can be compared with other agencies."
+      ]
+    },
+    {
+      "id": "DFTA",
+      "acronym": "DFTA",
+      "name": "Department for the Aging",
+      "portfolio": "hhs",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Senior centers, home-delivered meals, and case management for older adults.",
+      "about": "DFTA funds a network of providers. City staff plan and monitor. The meals and the centers are mostly contracted.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Health and Human Services supervises and coordinates this agency.",
+      "expendituresMillions": 609.8,
+      "authorizedMillions": 620.2,
+      "positions": {
+        "actual": 320,
+        "authorized": 383,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": null,
+      "revenueMillions": 1.3,
+      "capitalMillions": 9.2,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": 521.1,
+      "watch": "Contracts are $521 million of $610 million in spending, with 320 city positions. The card to improve is the provider network, not the headcount.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Split the human-services contract budget by program. The total is too large to be the last word."
+      ]
+    },
+    {
+      "id": "LIBS",
+      "acronym": "LIBS",
+      "name": "Public Libraries",
+      "portfolio": "economic",
+      "tie": "liaison",
+      "assignment": "inferred",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "The New York Public Library, Brooklyn Public Library, and Queens Public Library, reported as one chapter.",
+      "about": "The New York Public Library, Brooklyn Public Library, and Queens Public Library, reported as one chapter.",
+      "reportingNote": "The three systems are independent nonprofits with their own boards. The city appropriates their operating support. Executive Order 23 does not name them as an agency. It tells Economic Justice to keep a liaison with cultural organizations, including libraries. This card uses that sentence.",
+      "expendituresMillions": 539.8,
+      "authorizedMillions": 527.3,
+      "positions": {
+        "actual": 4272,
+        "authorized": 4311,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": null,
+      "revenueMillions": null,
+      "capitalMillions": 163.3,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "One MMR row covers three systems and 4,272 positions. A useful next card splits the appropriation by system.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line.",
+        "Confirm the reporting line against the current org chart. This placement is inferred from the order, not named in it."
+      ]
+    },
+    {
+      "id": "DOF",
+      "acronym": "DOF",
+      "name": "Department of Finance",
+      "portfolio": "fdm",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Property tax, business taxes, parking tickets, and the collection of money owed to the city.",
+      "about": "Finance is a revenue agency under the First Deputy Mayor. What it collects is not the cost of running it. The two numbers belong on the same card and should not be swapped.",
+      "reportingNote": "Executive Order 23 says the First Deputy Mayor supervises and coordinates this agency.",
+      "expendituresMillions": 375.4,
+      "authorizedMillions": 387.6,
+      "positions": {
+        "actual": 1794,
+        "authorized": 2066,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 1.994,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 1256.7,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "The expense line is $375 million. Revenue reported in the same table is $1.3 billion. Overtime is in thousands: about $2.0 million.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "SBS",
+      "acronym": "SBS",
+      "name": "Department of Small Business Services",
+      "portfolio": "economic",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Workforce programs, services for small businesses, and the Office of Nightlife.",
+      "about": "SBS sits with Economic Justice. Workforce contracts and commercial-district work are the bulk of the budget. The department's own staff is a few hundred people.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Economic Justice supervises and coordinates this agency.",
+      "expendituresMillions": 331.3,
+      "authorizedMillions": 366.7,
+      "positions": {
+        "actual": 318,
+        "authorized": 433,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.092,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 0.3,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": 59.5,
+      "watch": "318 positions against 433 authorized, the widest relative gap among the mid-size agencies on this list. The human-services contract line is only $60 million, so most of the $331 million is other than that contract category.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "LAW",
+      "acronym": "LAW",
+      "name": "Law Department",
+      "portfolio": "counsel",
+      "tie": "liaison",
+      "assignment": "named",
+      "reportsToMayor": true,
+      "parent": null,
+      "oneLiner": "The city's lawyers. The Corporation Counsel represents the city in court and advises agencies.",
+      "about": "Section 12 says the Corporation Counsel reports to the Mayor. Executive Order 23 also gives the Chief Counsel a liaison with the department. Both are true, and they are not the same relationship.",
+      "reportingNote": "Executive Order 23 says the Chief Counsel maintains a liaison with this agency. A liaison is not day-to-day supervision. Section 12 also says the Corporation Counsel reports directly to the Mayor.",
+      "expendituresMillions": 329.9,
+      "authorizedMillions": 327.0,
+      "positions": {
+        "actual": 1544,
+        "authorized": 1687,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 2.457,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 45.9,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "Overtime is published in thousands, about $2.5 million. Judgment and settlement costs are not this expense line.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DCLA",
+      "acronym": "DCLA",
+      "name": "Department of Cultural Affairs",
+      "portfolio": "economic",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "City funding for museums, theaters, and other cultural organizations, plus a small staff to run the programs.",
+      "about": "Cultural Affairs is a grantmaker. The institutions it funds employ their own staff. The department's headcount is the people who administer that support.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Economic Justice supervises and coordinates this agency.",
+      "expendituresMillions": 300.1,
+      "authorizedMillions": 300.7,
+      "positions": {
+        "actual": 63,
+        "authorized": 71,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": null,
+      "revenueMillions": null,
+      "capitalMillions": 350.7,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Sixty-three positions administer $300 million of expense and $351 million of capital commitments. The card is about the cultural network, not a large city workforce.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Show capital projects beside expense, by who the project is for."
+      ]
+    },
+    {
+      "id": "BOE",
+      "acronym": "BOE",
+      "name": "Board of Elections",
+      "portfolio": "staff",
+      "tie": "liaison",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Runs city elections. A board created by state law, not a mayoral agency.",
+      "about": "The Chief of Staff maintains the liaison. The Mayor does not appoint the commissioners the way agency heads are appointed. Election calendars swing the budget from year to year.",
+      "reportingNote": "Executive Order 23 says the Chief of Staff maintains a liaison with this agency. A liaison is not day-to-day supervision.",
+      "expendituresMillions": 273.8,
+      "authorizedMillions": 214.4,
+      "positions": {
+        "actual": 890,
+        "authorized": 652,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 8.3,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "Spending of $274 million is above the $214 million authorized figure, and actual positions, 890, are above 652 authorized. Poll-worker and election-year costs do not behave like a steady agency.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DOB",
+      "acronym": "DOB",
+      "name": "Department of Buildings",
+      "portfolio": "housing",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Building permits, inspections, and construction safety.",
+      "about": "Buildings decides what can be built and whether a site is safe. Fee revenue is large relative to the department's own spending, because applicants pay for the permits.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Housing and Planning supervises and coordinates this agency.",
+      "expendituresMillions": 202.3,
+      "authorizedMillions": 233.1,
+      "positions": {
+        "actual": 1695,
+        "authorized": 1883,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 3.0,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": 481.3,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "Revenue in the table is $481 million, more than double the $202 million expense line. The department can look small on spending and large on the construction market it regulates.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DDC",
+      "acronym": "DDC",
+      "name": "Department of Design and Construction",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Designs and builds public buildings and infrastructure for other agencies.",
+      "about": "DDC is a client-service agency. Its own expense budget pays its staff. The projects it manages are capital, booked for the agencies that will own them.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 175.8,
+      "authorizedMillions": 178.9,
+      "positions": {
+        "actual": 1165,
+        "authorized": 1217,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 1.1,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": null,
+      "capitalMillions": 4196.3,
+      "capitalLabel": "Capital commitments managed for other agencies",
+      "contractMillions": null,
+      "watch": "The expense line is $176 million. Capital commitments managed for client agencies are $4.2 billion. Using the expense line alone makes the agency look like a small shop.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Show capital projects beside expense, by who the project is for."
+      ]
+    },
+    {
+      "id": "OCME",
+      "acronym": "OCME",
+      "name": "Office of Chief Medical Examiner",
+      "portfolio": "hhs",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Forensic pathology, death investigation, and the city's DNA laboratory.",
+      "about": "OCME determines cause and manner of death in cases that fall under its jurisdiction. It is a health-and-human-services agency with a public-safety workload.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Health and Human Services supervises and coordinates this agency.",
+      "expendituresMillions": 123.7,
+      "authorizedMillions": 127.9,
+      "positions": {
+        "actual": 773,
+        "authorized": 906,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 7.1,
+        "publishedAs": "millions"
+      },
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "Overtime is $7.1 million on a $124 million budget, about 6 percent. The lab and the morgue do not scale down when caseloads spike.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DOP",
+      "acronym": "DOP",
+      "name": "Department of Probation",
+      "portfolio": "fdm",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Supervision in the community for people sentenced to probation.",
+      "about": "Probation is the alternative to jail for the cases the courts assign to it. It reports through the First Deputy Mayor, beside Correction and the police.",
+      "reportingNote": "Executive Order 23 says the First Deputy Mayor supervises and coordinates this agency.",
+      "expendituresMillions": 119.6,
+      "authorizedMillions": 116.0,
+      "positions": {
+        "actual": 833,
+        "authorized": 1095,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 2.995,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "833 positions against 1,095 authorized. Overtime is published in thousands, about $3.0 million, not $3 billion.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "NYCEM",
+      "acronym": "NYCEM",
+      "name": "New York City Emergency Management",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Plans for emergencies and coordinates the city when one is underway.",
+      "about": "The order calls it the Office of Emergency Management. The MMR uses New York City Emergency Management. It is a coordination agency. Other departments bring the trucks, the hospital beds, and the officers.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 85.4,
+      "authorizedMillions": 89.3,
+      "positions": {
+        "actual": 238,
+        "authorized": 246,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.872,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "A small standing staff, 238 people and an $85 million budget. The cost of a response shows up in the agencies that execute it.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DCWP",
+      "acronym": "DCWP",
+      "name": "Department of Consumer and Worker Protection",
+      "portfolio": "economic",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Licenses businesses and enforces consumer and workplace laws, including paid safe and sick leave.",
+      "about": "DCWP is the regulator for a long list of licenses and for worker-protection rules that used to sit in several places. It sits with Economic Justice.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Economic Justice supervises and coordinates this agency.",
+      "expendituresMillions": 83.9,
+      "authorizedMillions": 85.5,
+      "positions": {
+        "actual": 430,
+        "authorized": 485,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.118,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 20.3,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "430 positions on an $84 million budget. License revenue is $20 million in this table, so the agency is not self-financing.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "OATH",
+      "acronym": "OATH",
+      "name": "Office of Administrative Trials and Hearings",
+      "portfolio": "counsel",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "The city's administrative court for summonses and for hearings that city employees and licensees are entitled to.",
+      "about": "OATH, including the Environmental Control Board, is the one agency the Chief Counsel supervises directly. Most city enforcement ends in a hearing here rather than in state court.",
+      "reportingNote": "Executive Order 23 says the Chief Counsel supervises and coordinates this agency.",
+      "expendituresMillions": 75.3,
+      "authorizedMillions": 81.8,
+      "positions": {
+        "actual": 490,
+        "authorized": 595,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.01,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 189.8,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "Revenue of $190 million is more than double the $75 million expense line. Fines collected are not the cost of the tribunal.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DOI",
+      "acronym": "DOI",
+      "name": "Department of Investigation",
+      "portfolio": "counsel",
+      "tie": "liaison",
+      "assignment": "named",
+      "reportsToMayor": true,
+      "parent": null,
+      "oneLiner": "Investigates corruption and misconduct by city employees, contractors, and people who do business with the city.",
+      "about": "Section 12 says the commissioner reports to the Mayor. The Chief Counsel maintains a liaison. DOI is independent in statute in ways a normal mayoral agency is not. This card does not try to settle that tension.",
+      "reportingNote": "Executive Order 23 says the Chief Counsel maintains a liaison with this agency. A liaison is not day-to-day supervision. Section 12 also says the Commissioner reports directly to the Mayor.",
+      "expendituresMillions": 65.6,
+      "authorizedMillions": 64.1,
+      "positions": {
+        "actual": 282,
+        "authorized": 314,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.107,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 4.1,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "A $66 million agency with 282 positions. Its effect is the cases, which the expenditure line does not measure.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "311",
+      "acronym": "311",
+      "name": "311 Customer Service Center",
+      "portfolio": "staff",
+      "tie": "liaison",
+      "assignment": "inferred",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "The phone, app, and web front door for non-emergency city services.",
+      "about": "The phone, app, and web front door for non-emergency city services.",
+      "reportingNote": "311 takes the request and sends it to the agency that does the work. Executive Order 23 does not name 311. It places the Mayor's Office of Operations, which publishes the MMR, under the Chief of Staff. This card follows that placement and labels it as inferred.",
+      "expendituresMillions": 64.2,
+      "authorizedMillions": 66.3,
+      "positions": {
+        "actual": 309,
+        "authorized": 394,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.239,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "309 positions against 394 authorized, on a $64 million budget. The service requests themselves are answered by other agencies.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line.",
+        "Confirm the reporting line against the current org chart. This placement is inferred from the order, not named in it."
+      ]
+    },
+    {
+      "id": "TLC",
+      "acronym": "TLC",
+      "name": "Taxi and Limousine Commission",
+      "portfolio": "economic",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Licenses and regulates yellow cabs, green cabs, and for-hire vehicles and their drivers.",
+      "about": "TLC sets the rules for the vehicles that are not the MTA. License and summons revenue is a real part of the agency's public numbers.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Economic Justice supervises and coordinates this agency.",
+      "expendituresMillions": 61.8,
+      "authorizedMillions": 62.0,
+      "positions": {
+        "actual": 468,
+        "authorized": 580,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.809,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 70.2,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "Revenue of $70 million exceeds the $62 million expense line. Authorized positions are 580 against 468 filled.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DCP",
+      "acronym": "DCP",
+      "name": "Department of City Planning",
+      "portfolio": "housing",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Zoning, land-use review, and the city's official demographic and planning data.",
+      "about": "City Planning staffs the City Planning Commission. A rezoning changes what can be built. The department's own budget is small next to the private investment those decisions unlock.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Housing and Planning supervises and coordinates this agency.",
+      "expendituresMillions": 52.6,
+      "authorizedMillions": 58.2,
+      "positions": {
+        "actual": 324,
+        "authorized": 388,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.032,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 4.1,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "324 positions and a $53 million budget. The housing numbers people quote from rezonings are not in this expense line.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "CCRB",
+      "acronym": "CCRB",
+      "name": "Civilian Complaint Review Board",
+      "portfolio": "fdm",
+      "tie": "liaison",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Investigates civilian complaints of misconduct by police officers.",
+      "about": "CCRB is independent of the police department. The First Deputy Mayor's relationship in Executive Order 23 is a liaison. The board's jurisdiction and the commissioner's discipline power are different steps.",
+      "reportingNote": "Executive Order 23 says the First Deputy Mayor maintains a liaison with this agency. A liaison is not day-to-day supervision.",
+      "expendituresMillions": 29.4,
+      "authorizedMillions": 29.4,
+      "positions": {
+        "actual": 245,
+        "authorized": 273,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.415,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "A $29 million agency. Its output is investigations and findings, which this resources table does not carry. Those live in the performance chapter.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DORIS",
+      "acronym": "DORIS",
+      "name": "Department of Records and Information Services",
+      "portfolio": "operations",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "The municipal archives and the rules for how agencies keep records.",
+      "about": "DORIS preserves the historical record and sets retention schedules. It is a small operations agency with a citywide rule to enforce.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Operations supervises and coordinates this agency.",
+      "expendituresMillions": 16.5,
+      "authorizedMillions": 16.1,
+      "positions": {
+        "actual": 55,
+        "authorized": 53,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": null,
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "Fifty-five positions and a $16 million budget. Actual headcount is slightly above the authorized figure in this edition.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "CCHR",
+      "acronym": "CCHR",
+      "name": "City Commission on Human Rights",
+      "portfolio": "economic",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Enforces the city human-rights law against discrimination in work, housing, and public places.",
+      "about": "The commission investigates complaints and can order remedies. It sits with Economic Justice, next to worker protection, because the order treats discrimination as an economic question as well as a legal one.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Economic Justice supervises and coordinates this agency.",
+      "expendituresMillions": 13.3,
+      "authorizedMillions": 15.4,
+      "positions": {
+        "actual": 109,
+        "authorized": 145,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.004,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "109 positions against 145 authorized, on a $13 million budget. Caseload, not spending, is the performance question.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "BIC",
+      "acronym": "BIC",
+      "name": "Business Integrity Commission",
+      "portfolio": "fdm",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Regulates private trash hauling, the public wholesale markets, and shipboard gambling.",
+      "about": "BIC licenses industries with a history of organized-crime influence. It is one of the smaller agencies the First Deputy Mayor supervises directly.",
+      "reportingNote": "Executive Order 23 says the First Deputy Mayor supervises and coordinates this agency.",
+      "expendituresMillions": 9.2,
+      "authorizedMillions": 9.2,
+      "positions": {
+        "actual": 67,
+        "authorized": 73,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.096,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 13.0,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "Spending is $9.2 million. License revenue in the same table is $13.0 million. The agency is small and, on these figures, more than covers its expense line.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "LPC",
+      "acronym": "LPC",
+      "name": "Landmarks Preservation Commission",
+      "portfolio": "housing",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Designates landmarks and historic districts and reviews changes to them.",
+      "about": "LPC decides what is protected and then permits alterations. It sits with Housing and Planning because landmark rules shape what can be built.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Housing and Planning supervises and coordinates this agency.",
+      "expendituresMillions": 9.0,
+      "authorizedMillions": 9.0,
+      "positions": {
+        "actual": 73,
+        "authorized": 81,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": {
+        "millions": 0.007,
+        "publishedAs": "thousands"
+      },
+      "revenueMillions": 11.4,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "A $9 million agency whose decisions move private construction costs that never appear in its budget. Permit revenue in the table is $11 million.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "DVS",
+      "acronym": "DVS",
+      "name": "Department of Veterans' Services",
+      "portfolio": "hhs",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Connects veterans and their families to benefits, housing help, and city services.",
+      "about": "DVS is a navigation agency. The benefits themselves are mostly federal, or sit in HRA, HPD, and other departments. The department's job is to get people to those doors.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Health and Human Services supervises and coordinates this agency.",
+      "expendituresMillions": 7.3,
+      "authorizedMillions": 7.7,
+      "positions": {
+        "actual": 45,
+        "authorized": 50,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": null,
+      "revenueMillions": null,
+      "capitalMillions": null,
+      "capitalLabel": null,
+      "contractMillions": null,
+      "watch": "The smallest expenditure line in the report: $7.3 million and 45 positions. Impact depends on other agencies' programs.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Separate city funds from state and federal funds inside the expenditure line."
+      ]
+    },
+    {
+      "id": "EDC",
+      "acronym": "EDC",
+      "name": "New York City Economic Development Corporation",
+      "portfolio": "economic",
+      "tie": "supervise",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "The nonprofit that does the city's economic-development deals, asset management, and many capital projects.",
+      "about": "Executive Order 23 says the Deputy Mayor for Economic Justice supervises EDC as provided in the contracts between the city and EDC. The MMR publishes headcount and capital commitments, and does not publish an expenditures row.",
+      "reportingNote": "Executive Order 23 says the Deputy Mayor for Economic Justice supervises and coordinates this agency. The order ties that supervision to the contracts between the city and EDC.",
+      "expendituresMillions": null,
+      "authorizedMillions": null,
+      "positions": {
+        "actual": 599,
+        "authorized": 625,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": null,
+      "revenueMillions": null,
+      "capitalMillions": 341.0,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "599 positions are in the table. There is no expenditures line to put beside them. EDC's own financial statements are the missing budget.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Show capital projects beside expense, by who the project is for."
+      ]
+    },
+    {
+      "id": "SCA",
+      "acronym": "SCA",
+      "name": "School Construction Authority",
+      "portfolio": "fdm",
+      "tie": "liaison",
+      "assignment": "named",
+      "reportsToMayor": false,
+      "parent": null,
+      "oneLiner": "Builds and renovates public school buildings.",
+      "about": "SCA is an authority. The First Deputy Mayor's relationship is a liaison, listed alongside CUNY. The MMR publishes headcount and a large capital-commitment line, not an operating-expenditure row.",
+      "reportingNote": "Executive Order 23 says the First Deputy Mayor maintains a liaison with this agency. A liaison is not day-to-day supervision.",
+      "expendituresMillions": null,
+      "authorizedMillions": null,
+      "positions": {
+        "actual": 977,
+        "authorized": 1059,
+        "lines": [],
+        "note": null,
+        "comparable": true
+      },
+      "overtime": null,
+      "revenueMillions": null,
+      "capitalMillions": 3931.0,
+      "capitalLabel": "Capital commitments",
+      "contractMillions": null,
+      "watch": "Capital commitments are $3.9 billion. Headcount is 977. Without the capital line, the authority looks like a mid-size office.",
+      "gaps": [
+        "Add the critical performance indicators from this agency's MMR chapter, with the direction each one is supposed to move.",
+        "Show capital projects beside expense, by who the project is for."
+      ]
+    }
+  ]
+}
