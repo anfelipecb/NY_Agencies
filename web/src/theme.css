@@ -1,0 +1,88 @@
+/* Daylight is the default. Dusk applies when <html data-theme="dark">. Spend-scale colors live in palette.ts. */
+:root {
+  --bg: #eef0f4;
+  --bg-deep: #e3e6ee;
+  --ink: #0b0c18;
+  --muted: #0b0c18;
+  --faint: #0b0c18;
+  --hi: 11, 12, 24;
+  --line: rgba(11, 12, 24, 0.12);
+  --glass: rgba(255, 255, 255, 0.62);
+  --glass-edge: rgba(11, 12, 24, 0.1);
+  --seam: rgba(238, 240, 244, 0.85);
+  --glow-1: rgba(79, 123, 255, 0.18);
+  --glow-2: rgba(214, 247, 94, 0.28);
+  --glow-3: rgba(63, 184, 201, 0.16);
+  --strip-glow: rgba(29, 26, 143, 0.3);
+  --shadow: rgba(20, 24, 60, 0.22);
+  --ring: #0b0c18;
+  --empty-ink: #0b0c18;
+  --panel-a: rgba(255, 255, 255, 0.72);
+  --panel-a-hover: rgba(255, 255, 255, 0.92);
+  --panel-b: rgba(255, 255, 255, 0.45);
+  --tip-bg: rgba(255, 255, 255, 0.84);
+  --sheet-bg: rgba(255, 255, 255, 0.88);
+
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sans: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  color-scheme: light;
+}
+
+/* Dusk: the same editorial structure at night. Crisp panels and full-white ink, with the glow kept low. */
+:root[data-theme="dark"] {
+  --bg: #0d0e1a;
+  --bg-deep: #08080f;
+  --ink: #ffffff;
+  --muted: #ffffff;
+  --faint: #ffffff;
+  --hi: 255, 255, 255;
+  --line: rgba(255, 255, 255, 0.14);
+  --glass: rgba(26, 26, 44, 0.6);
+  --glass-edge: rgba(255, 255, 255, 0.14);
+  --seam: rgba(13, 14, 26, 0.6);
+  --glow-1: rgba(122, 63, 224, 0.18);
+  --glow-2: rgba(224, 70, 156, 0.08);
+  --glow-3: rgba(255, 133, 71, 0.1);
+  --strip-glow: rgba(224, 70, 156, 0.4);
+  --shadow: rgba(0, 0, 0, 0.8);
+  --ring: #ffffff;
+  --empty-ink: #ffffff;
+  --panel-a: rgba(255, 255, 255, 0.07);
+  --panel-a-hover: rgba(255, 255, 255, 0.1);
+  --panel-b: rgba(255, 255, 255, 0.035);
+  --tip-bg: rgba(22, 21, 38, 0.82);
+  --sheet-bg: rgba(22, 21, 38, 0.88);
+  color-scheme: dark;
+}
+
+/* Each tile, segment, tooltip and card carries both palettes; pick the pair for the active mode. */
+.tile,
+.seg,
+.tip {
+  --tone: var(--tone-l, #ffffff);
+  --ink: var(--ink-l, #0b0c18);
+}
+
+.card {
+  --pick: var(--pick-l, #ffffff);
+  --pick-ink: var(--pick-ink-l, #0b0c18);
+}
+
+.ramp-bar {
+  background: var(--ramp-l);
+}
+
+:root[data-theme="dark"] :is(.tile, .seg, .tip) {
+  --tone: var(--tone-d, #ffffff);
+  --ink: var(--ink-d, #14101f);
+}
+
+:root[data-theme="dark"] .card {
+  --pick: var(--pick-d, #ffffff);
+  --pick-ink: var(--pick-ink-d, #14101f);
+}
+
+:root[data-theme="dark"] .ramp-bar {
+  background: var(--ramp-d);
+}

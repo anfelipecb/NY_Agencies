@@ -3,23 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NY Agencies · Andrés Camacho</title>
+    <title>NY Agencies</title>
     <meta
       name="description"
-      content="Fiscal 2026 public cards for New York City agencies: what each one does, what it spent, and how many people it employs, placed on the Executive Order 23 org chart."
+      content="New York City agencies in one view, ordered and colored by Fiscal 2026 spending."
     />
-    <meta property="og:title" content="NY Agencies" />
-    <meta
-      property="og:description"
-      content="Click an acronym. Read the budget, the headcount, and where the agency sits."
-    />
-    <meta property="og:type" content="website" />
+    <script>
+      try {
+        if (localStorage.getItem("theme") === "dark") document.documentElement.dataset.theme = "dark";
+      } catch {}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="app"></div>

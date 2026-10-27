@@ -1,388 +1,263 @@
 import catalog from "../../data/agencies.json";
-import { mountHeroField } from "./hero-field";
 import { esc, money, people } from "./format";
-
-type Agency = (typeof catalog.agencies)[number];
-type PortfolioId = (typeof catalog.portfolios)[number]["id"] | "all";
+import {
+  bindTooltip,
+  clusterLabel,
+  orderedAgencies,
+  rampGradient,
+  renderField,
+  renderSegments,
+  spendRange,
+  toneVars,
+  totalSpend,
+  visualOrder,
+  type Agency,
+} from "./field";
+import { moneyTile } from "./format";
 
 const agencies = catalog.agencies;
-const portfolios = catalog.portfolios;
 
 export function mountApp(root: HTMLElement): void {
-  const state = {
-    portfolio: "all" as PortfolioId,
-    query: "",
-    selected: agencyFromHash(),
+  const state = { selected: agencyFromHash() };
+
+  const [low, high] = spendRange(agencies);
+  const funded = agencies.filter((agency) => agency.expendituresMillions != null).length;
+
+  root.innerHTML = `
+    <div class="backdrop" aria-hidden="true"></div>
+    <div class="stage">
+      <header class="mast">
+        <div class="mast-copy">
+          <h1>New York City agencies</h1>
+          <p>Grouped by who they report to under Executive Order 23. Inside each group, the largest Fiscal 2026 expenditure comes first. Color is that amount, on one scale.</p>
+        </div>
+        <div class="mode" role="group" aria-label="Color theme">
+          <button type="button" data-mode="light">${SUN}Light</button>
+          <button type="button" data-mode="dark">${MOON}Dark</button>
+        </div>
+        <div class="total">
+          <p class="total-value">${money(totalSpend(agencies))}</p>
+          <p class="total-label">spent by ${funded} agencies in Fiscal 2026</p>
+        </div>
+        <div class="strip" id="strip">${renderSegments(orderedAgencies(agencies), agencies, 0.03)}</div>
+        <div class="ramp">
+          <span>${moneyTile(low)}</span>
+          <div class="ramp-bar" aria-hidden="true"></div>
+          <span>${moneyTile(high)}</span>
+          <p>Color is spending on a log scale. Width in the bar above is spending as is.</p>
+        </div>
+      </header>
+      <div class="stage-body">
+        <div class="field">
+          <div id="field"></div>
+          ${renderColophon(funded)}
+        </div>
+        <aside class="card" id="card" aria-live="polite" hidden></aside>
+      </div>
+    </div>
+  `;
+
+  const rampBar = root.querySelector<HTMLElement>(".ramp-bar");
+  rampBar?.style.setProperty("--ramp-l", rampGradient("light"));
+  rampBar?.style.setProperty("--ramp-d", rampGradient("dark"));
+
+  const modeButtons = root.querySelectorAll<HTMLButtonElement>(".mode button");
+  const showMode = () => {
+    const current = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    modeButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.mode === current)));
+  };
+  modeButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      const mode = button.dataset.mode === "dark" ? "dark" : "light";
+      document.documentElement.dataset.theme = mode;
+      try {
+        localStorage.setItem("theme", mode);
+      } catch {
+        // Private windows can refuse storage; the choice still applies for this visit.
+      }
+      showMode();
+    }),
+  );
+  showMode();
+
+  bindTooltip(root, agencies);
+
+  const stageBody = root.querySelector<HTMLElement>(".stage-body");
+  const field = root.querySelector<HTMLElement>("#field");
+  const card = root.querySelector<HTMLElement>("#card");
+  if (!stageBody || !field || !card) return;
+
+  const draw = () => {
+    const selected = agencies.find((agency) => agency.id === state.selected) ?? null;
+    stageBody.classList.toggle("has-card", Boolean(selected));
+    card.hidden = !selected;
+    if (selected) {
+      card.setAttribute("style", toneVars(agencies, selected.expendituresMillions, "pick", "pick-ink") ?? "");
+      card.innerHTML = renderCard(selected);
+    } else {
+      card.innerHTML = "";
+      card.removeAttribute("style");
+    }
+    renderField(field, agencies, catalog.portfolios, state.selected, choose);
   };
 
-  root.innerHTML = shell();
-  const hero = root.querySelector<HTMLElement>(".hero");
-  if (hero) mountHeroField(hero);
-
-  const search = root.querySelector<HTMLInputElement>("#search");
-  const atlas = root.querySelector<HTMLElement>("#atlas");
-  const detail = root.querySelector<HTMLElement>("#detail");
-  if (!search || !atlas || !detail) return;
-
-  const draw = (scroll: boolean) => {
-    paintFilters(root, state.portfolio);
-    atlas.innerHTML = renderAtlas(state.portfolio, state.query, state.selected);
-    detail.innerHTML = renderDetail(state.selected);
-    if (scroll && state.selected) {
-      detail.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+  const choose = (id: string | null) => {
+    state.selected = state.selected === id ? null : id;
+    const next = state.selected ? `#${state.selected}` : window.location.pathname + window.location.search;
+    history.replaceState(null, "", next);
+    draw();
   };
 
-  root.querySelector("[data-scroll='atlas']")?.addEventListener("click", () => {
-    document.getElementById("atlas")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  root.querySelector("#strip")?.addEventListener("click", (event) => {
+    const seg = (event.target as HTMLElement).closest<HTMLElement>(".seg");
+    if (seg?.dataset.id) choose(seg.dataset.id);
   });
 
-  root.querySelector("#filters")?.addEventListener("click", (event) => {
-    const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-portfolio]");
-    if (!button) return;
-    state.portfolio = button.dataset.portfolio as PortfolioId;
-    draw(false);
-  });
-
-  search.addEventListener("input", () => {
-    state.query = search.value;
-    draw(false);
-  });
-
-  atlas.addEventListener("click", (event) => {
-    const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-agency]");
-    if (!button?.dataset.agency) return;
-    choose(button.dataset.agency, true);
-  });
-
-  detail.addEventListener("click", (event) => {
-    const target = event.target as HTMLElement;
-    const agencyButton = target.closest<HTMLButtonElement>("[data-agency]");
-    if (agencyButton?.dataset.agency) {
-      choose(agencyButton.dataset.agency, true);
-      return;
-    }
-    if (target.closest("[data-clear]")) choose(null, false);
+  card.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement).closest("[data-clear]")) choose(null);
   });
 
   window.addEventListener("hashchange", () => {
     state.selected = agencyFromHash();
-    draw(Boolean(state.selected));
+    draw();
   });
 
   window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && state.selected) choose(null, false);
+    if (event.key === "Escape" && state.selected) {
+      choose(null);
+      return;
+    }
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft" && event.key !== "ArrowDown" && event.key !== "ArrowUp") {
+      return;
+    }
+    const target = event.target as HTMLElement;
+    if (target.closest("a, button, input, textarea")) return;
+    const order = visualOrder();
+    if (order.length === 0) return;
+    const index = order.findIndex((agency) => agency.id === state.selected);
+    const step = event.key === "ArrowRight" || event.key === "ArrowDown" ? 1 : -1;
+    const nextIndex = index < 0 ? 0 : (index + step + order.length) % order.length;
+    event.preventDefault();
+    choose(order[nextIndex].id);
   });
 
-  draw(Boolean(state.selected));
+  new ResizeObserver(() => {
+    renderField(field, agencies, catalog.portfolios, state.selected, choose);
+  }).observe(field);
 
-  function choose(id: string | null, scroll: boolean) {
-    state.selected = id;
-    const next = id ? `#${id}` : window.location.pathname + window.location.search;
-    history.replaceState(null, "", next);
-    draw(scroll);
-  }
+  draw();
 }
+
+const SUN = `<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="currentColor"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6L13 13M3 13l1.4-1.4M11.6 4.4L13 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+const MOON = `<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M13.5 10.2A6 6 0 0 1 5.8 2.5a6 6 0 1 0 7.7 7.7z" fill="currentColor"/></svg>`;
 
 function agencyFromHash(): string | null {
   const id = window.location.hash.replace("#", "");
   return agencies.some((agency) => agency.id === id) ? id : null;
 }
 
-function shell(): string {
-  const spent = agencies.reduce((sum, agency) => sum + (agency.expendituresMillions ?? 0), 0);
-  const headcount = agencies.reduce((sum, agency) => sum + agency.positions.actual, 0);
-  const filterButtons = [
-    `<button class="pane-tab active" type="button" data-portfolio="all">All 45</button>`,
-    ...portfolios.map(
-      (portfolio) =>
-        `<button class="pane-tab" type="button" data-portfolio="${portfolio.id}">${esc(shortLabel(portfolio.id))}</button>`,
-    ),
-  ].join("");
+const SOURCES = {
+  data: "https://data.cityofnewyork.us/City-Government/Mayor-s-Management-Report-Agency-Resources/4qmi-txnk",
+  report: "https://www.nyc.gov/assets/operations/downloads/pdf/mmr2026/2026_mmr.pdf",
+  order: "https://www.nyc.gov/mayors-office/news/2026/09/executive-order-no--23",
+};
 
+const GITHUB = "https://github.com/anfelipecb";
+
+const GITHUB_MARK = `<svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>`;
+
+function link(href: string, text: string): string {
+  return `<a href="${href}" target="_blank" rel="noopener">${text}</a>`;
+}
+
+function renderColophon(funded: number): string {
+  const { meta } = catalog;
+  const empty = agencies.filter((agency) => agency.expendituresMillions == null).map((agency) => agency.acronym);
+  const inferred = agencies.filter((agency) => agency.assignment === "inferred").map((agency) => agency.name);
   return `
-    <header class="hero">
-      <canvas class="hero-field" aria-hidden="true"></canvas>
-      <div class="hero-copy">
-        <p class="eyebrow">New York City · Executive Order 23 · Fiscal 2026</p>
-        <h1>NY Agencies</h1>
-        <p class="lede">
-          Forty-five agencies publish a budget or a headcount in the Mayor's Management Report.
-          The label is the acronym. Open one for what it does, what it spent, and how many people it employs.
-        </p>
-        <button class="hero-scroll" type="button" data-scroll="atlas">
-          <span class="hero-scroll-glow" aria-hidden="true"></span>
-          Choose an agency
-        </button>
+    <footer class="colophon">
+      <details class="method">
+        <summary>
+          <span>About the data</span>
+          <span class="method-hint">Sources, definitions, and what is left out</span>
+        </summary>
+        <div class="method-body">
+          <section>
+            <h3>Source</h3>
+            <p>Every figure comes from the agency resources table of the Fiscal ${meta.fiscalYear} ${link(SOURCES.report, "Mayor's Management Report")} (MMR), published by the Mayor's Office of Operations. The same table is on NYC Open Data as ${link(SOURCES.data, "Mayor's Management Report Agency Resources, dataset 4qmi-txnk")}. Fiscal ${meta.fiscalYear} runs ${esc(meta.window)}.</p>
+          </section>
+          <section>
+            <h3>Spending</h3>
+            <p>Spending is the MMR row Expenditures ($000,000), column “current fiscal year projected actual,” shown in dollars. It is not the adopted budget, and it includes all funds: city, state, and federal. The authorized figure on each card is the same row's current-year authorized budget. The ${money(totalSpend(agencies))} total adds the ${funded} agencies that publish an expenditure row. ${empty.join(" and ")} publish headcount and capital commitments but no expenditure row, so they have no color and are not in the total.</p>
+          </section>
+          <section>
+            <h3>Headcount and other rows</h3>
+            <p>Positions are the MMR personnel rows, actual against authorized. Where the report publishes uniformed and civilian rows separately, the card adds them. Parks reports full-time staff and full-time equivalents together, so its headcount is not comparable with full-time-only agencies. Overtime, human-services contracts, capital commitments, and revenue appear only where the agency's table has that row.</p>
+          </section>
+          <section>
+            <h3>Reporting lines</h3>
+            <p>Groups follow ${link(SOURCES.order, esc(meta.order))}, which assigns agencies to deputy mayors and senior staff either to supervise or to keep a liaison. Each card says which. Two placements, ${inferred.join(" and ")}, are inferred from the order rather than named in it, and their cards say so. Mayor's offices without their own MMR chapter, such as the Office of Management and Budget, are not included.</p>
+          </section>
+          <section>
+            <h3>Color and size</h3>
+            <p>Tile color places each agency's spending between the smallest and the largest on a logarithmic scale, so a $9 million commission and a $38 billion school system both stay readable. Widths in the spending band and the group bars are proportional to dollars, not logarithmic.</p>
+          </section>
+          <section>
+            <h3>Checks and limits</h3>
+            <p>When a copy of the Open Data file is available, the build script compares every figure with it and stops if any differs by more than rounding. All ${agencies.length} agencies match. ${esc(meta.disclaimer)} Agency descriptions summarize the MMR chapters and the executive order. They are written for this site and are not official text.</p>
+          </section>
+        </div>
+      </details>
+      <div class="sign">
+        <p>Fiscal ${meta.fiscalYear} figures. Made with public data.</p>
+        <a class="github" href="${GITHUB}" target="_blank" rel="noopener" aria-label="anfelipecb on GitHub">${GITHUB_MARK}<span>anfelipecb</span></a>
       </div>
-    </header>
-
-    <nav class="pane-nav" id="filters" aria-label="Portfolios">
-      <div class="filter-row">${filterButtons}</div>
-      <input class="search" id="search" type="search" placeholder="Search acronym or name" aria-label="Search agencies" />
-    </nav>
-
-    <main>
-      <section class="stat-grid" aria-label="Citywide picture">
-        <article class="stat-card">
-          <p class="stat-label">Agencies on this atlas</p>
-          <p class="stat-value">45</p>
-          <p class="stat-caption">Every MMR chapter with a resources row</p>
-        </article>
-        <article class="stat-card">
-          <p class="stat-label">Expenditures, FY2026</p>
-          <p class="stat-value">${money(spent)}</p>
-          <p class="stat-caption">Sum of the published expenditure lines. EDC and SCA have none.</p>
-        </article>
-        <article class="stat-card">
-          <p class="stat-label">Positions, actual</p>
-          <p class="stat-value">${people(headcount)}</p>
-          <p class="stat-caption">Adds each agency's headline headcount. Parks includes full-time equivalents.</p>
-        </article>
-      </section>
-      <p class="caveat">Larger labels spent more. Totals add mayoral departments, authorities, the libraries, and CUNY. They are a map, not the adopted budget.</p>
-      <div id="atlas"></div>
-      <div id="detail" class="detail" aria-live="polite"></div>
-      ${planSection()}
-    </main>
-
-    <footer class="site-footer">
-      <p>${esc(catalog.meta.disclaimer)} ${esc(catalog.meta.source)}. ${esc(catalog.meta.order)}.</p>
-      <p class="byline">Andrés Camacho · Independent reading of NYC public data</p>
     </footer>
   `;
 }
 
-function paintFilters(root: HTMLElement, active: PortfolioId): void {
-  root.querySelectorAll<HTMLButtonElement>("[data-portfolio]").forEach((button) => {
-    const on = button.dataset.portfolio === active;
-    button.classList.toggle("active", on);
-    button.setAttribute("aria-pressed", on ? "true" : "false");
-  });
-}
-
-function renderAtlas(portfolio: PortfolioId, query: string, selected: string | null): string {
-  const needle = query.trim().toLowerCase();
-  const visible = portfolios.filter((item) => portfolio === "all" || item.id === portfolio);
-  const groups = visible
-    .map((item) => {
-      const rows = agencies
-        .filter((agency) => agency.portfolio === item.id)
-        .filter((agency) => !needle || matches(agency, needle))
-        .sort((a, b) => (b.expendituresMillions ?? -1) - (a.expendituresMillions ?? -1));
-      return { item, rows };
-    })
-    .filter((group) => {
-      if (group.rows.length > 0) return true;
-      if (needle) return false;
-      return group.item.id === "safety" || portfolio !== "all";
-    });
-
-  if (needle && groups.every((group) => group.rows.length === 0)) {
-    return `<p class="empty">No agency matches “${esc(query.trim())}”.</p>`;
-  }
-
-  return groups
-    .map(({ item, rows }) => {
-      const buttons = rows.map((agency) => acronymButton(agency, selected)).join("");
-      const safety =
-        item.id === "safety"
-          ? `<div class="safety-note">
-              <p>The Deputy Mayor for Community Safety supervises the Office of Community Safety and B-HEARD. Neither has its own chapter in the management report.</p>
-              <p>B-HEARD is a joint operation. The public headcount and spending nearest to that work are on FDNY and Health + Hospitals.</p>
-              <div>
-                <button class="text-button" type="button" data-agency="FDNY">Open FDNY</button>
-                ·
-                <button class="text-button" type="button" data-agency="NYCHH">Open H+H</button>
-              </div>
-            </div>`
-          : "";
-      if (!buttons && !safety) return "";
-      return `
-        <section class="group">
-          <p class="eyebrow">${rows.length ? `${rows.length} ${rows.length === 1 ? "agency" : "agencies"}` : "No MMR chapter"}</p>
-          <h2>${esc(item.label)}</h2>
-          <p>${esc(item.blurb)}</p>
-          ${buttons ? `<div class="acronym-grid">${buttons}</div>` : ""}
-          ${safety}
-        </section>`;
-    })
-    .join("");
-}
-
-function acronymButton(agency: Agency, selected: string | null): string {
-  const size = sizeClass(agency);
-  const pressed = agency.id === selected;
-  return `<button class="acronym ${size}${pressed ? " is-selected" : ""}" type="button" data-agency="${agency.id}" aria-pressed="${pressed ? "true" : "false"}">${esc(agency.acronym)}</button>`;
-}
-
-function sizeClass(agency: Agency): string {
-  const spent = agency.expendituresMillions;
-  if (spent == null) return "sm";
-  if (spent >= 5000) return "xl";
-  if (spent >= 1000) return "lg";
-  if (spent >= 200) return "md";
-  return "sm";
-}
-
-function matches(agency: Agency, needle: string): boolean {
-  return [agency.acronym, agency.id, agency.name].join(" ").toLowerCase().includes(needle);
-}
-
-function renderDetail(selected: string | null): string {
-  if (!selected) {
-    return `
-      <section class="prompt" id="agency">
-        <p class="eyebrow">Agency card</p>
-        <h2>Open an acronym</h2>
-        <p>Each card has the Fiscal 2026 expenditure, the authorized figure beside it, and the published headcount. Where the report gives overtime, contract spending, capital commitments, or revenue, those are on the card too.</p>
-      </section>`;
-  }
-  const agency = agencies.find((item) => item.id === selected);
-  if (!agency) return "";
-  const portfolio = portfolios.find((item) => item.id === agency.portfolio);
-  const stats = statCards(agency);
-  const about =
-    agency.about !== agency.oneLiner
-      ? `<article class="knowledge-card"><h3>What it does</h3><p>${esc(agency.about)}</p></article>`
-      : "";
-  const lines = agency.positions.lines
-    .map(
-      (line) =>
-        `<li>${esc(line.label)}: ${people(line.actual)} actual, ${people(line.authorized)} authorized</li>`,
-    )
-    .join("");
-
-  return `
-    <section id="agency">
-      <div class="detail-head">
-        <div>
-          <p class="eyebrow">${esc(agency.acronym)} · ${esc(portfolio?.label ?? "")}</p>
-          <h2>${esc(agency.name)}</h2>
-        </div>
-        <button class="text-button" type="button" data-clear>Close</button>
-      </div>
-      <div class="badge-row">
-        <span class="badge">${agency.tie === "supervise" ? "Supervised" : "Liaison"}</span>
-        ${agency.assignment === "inferred" ? `<span class="badge gold">Placement inferred</span>` : ""}
-        ${agency.reportsToMayor ? `<span class="badge gold">Also reports to the Mayor</span>` : ""}
-        ${agency.parent ? `<span class="badge">${esc(agency.parent)}</span>` : ""}
-      </div>
-      <p class="lede">${esc(agency.oneLiner)}</p>
-      <div class="stat-grid">${stats}</div>
-      <div class="card-grid">
-        <article class="knowledge-card">
-          <h3>Where it sits</h3>
-          <p>${esc(agency.reportingNote)}</p>
-        </article>
-        ${about}
-        <article class="knowledge-card">
-          <h3>How to read the numbers</h3>
-          <p>${esc(agency.watch)}</p>
-          ${lines ? `<ul>${lines}</ul>` : ""}
-          ${agency.positions.note ? `<p class="stat-caption">${esc(agency.positions.note)}</p>` : ""}
-          <p class="stat-caption">Expenditures are the FY2026 projected actual. The authorized figure is the other column in the same row. Neither one is the adopted budget, and both can mix city, state, and federal funds.</p>
-          ${
-            agency.overtime?.publishedAs === "thousands"
-              ? `<p class="stat-caption">Overtime for this agency is published in thousands of dollars. It is converted to millions here so it can sit next to the others.</p>`
-              : ""
-          }
-        </article>
-        <article class="knowledge-card">
-          <h3>What would make this card better</h3>
-          <ul>${agency.gaps.map((gap) => `<li>${esc(gap)}</li>`).join("")}</ul>
-        </article>
-      </div>
-      <p class="sources">
-        <a href="https://www.nyc.gov/assets/operations/downloads/pdf/mmr2026/2026_mmr.pdf">Fiscal 2026 Mayor's Management Report</a>
-        · <a href="https://data.cityofnewyork.us/City-Government/Mayor-s-Management-Report-Agency-Resources/4qmi-txnk">Agency resources on NYC Open Data</a>
-        · <a href="https://www.nyc.gov/mayors-office/news/2026/09/executive-order-no--23">Executive Order 23</a>
-      </p>
-    </section>`;
-}
-
-function statCards(agency: Agency): string {
-  const cards: string[] = [];
-  cards.push(stat("Expenditures, FY2026", money(agency.expendituresMillions), "Projected actual"));
-  cards.push(stat("Authorized in the same row", money(agency.authorizedMillions), "Not a separate budget"));
-  const positionNote =
-    agency.positions.authorized > agency.positions.actual
-      ? `${people(agency.positions.authorized - agency.positions.actual)} below the authorized count`
-      : agency.positions.actual > agency.positions.authorized
-        ? "Actual is above the authorized count"
-        : "Matches the authorized count";
-  cards.push(stat("Positions, actual", people(agency.positions.actual), positionNote));
-  cards.push(stat("Positions, authorized", people(agency.positions.authorized), "Published headcount, not a vacancy study"));
-  if (agency.overtime) {
-    const share = overtimeShare(agency.overtime.millions, agency.expendituresMillions);
-    cards.push(stat("Overtime", money(agency.overtime.millions), share));
-  }
-  if (agency.contractMillions != null) {
-    cards.push(stat("Human-services contracts", money(agency.contractMillions), "Separate MMR resource row"));
-  }
-  if (agency.capitalMillions != null) {
-    cards.push(stat(agency.capitalLabel ?? "Capital commitments", money(agency.capitalMillions), "Not part of the expense line"));
-  }
-  if (agency.revenueMillions != null) {
-    cards.push(stat("Revenue in this table", money(agency.revenueMillions), "Not the same as the budget"));
-  }
-  return cards.join("");
-}
-
-function overtimeShare(overtime: number, expenditures: number | null): string {
-  if (!expenditures || expenditures <= 0) return "Published overtime";
-  const pct = (overtime / expenditures) * 100;
-  if (pct < 1) return "Under 1% of expenditures";
-  return `${Math.round(pct)}% of expenditures`;
-}
-
-function stat(label: string, value: string, caption: string): string {
-  return `
-    <article class="stat-card">
-      <p class="stat-label">${esc(label)}</p>
-      <p class="stat-value">${esc(value)}</p>
-      <p class="stat-caption">${esc(caption)}</p>
-    </article>`;
-}
-
-function shortLabel(id: string): string {
-  const labels: Record<string, string> = {
-    fdm: "First Deputy",
-    operations: "Operations",
-    hhs: "Health and human services",
-    housing: "Housing",
-    economic: "Economic justice",
-    counsel: "Counsel",
-    staff: "Chief of Staff",
-    safety: "Community safety",
-  };
-  return labels[id] ?? id;
-}
-
-function planSection(): string {
-  const steps = [
-    ["01", "Name the offices", "Executive Order 23 assigns OMB, Labor Relations, Contract Services, Immigrant Affairs, and Community Safety. They have no MMR chapter. Add them from the adopted budget's units of appropriation."],
-    ["02", "Split the funds", "An expenditure line mixes city, state, and federal money. The next cut is city funds versus categorical funds, then personal service versus other than personal service."],
-    ["03", "Add the results", "Each chapter has critical indicators and a direction they are supposed to move. Put five of those on the card so spending is not the only fact."],
-    ["04", "Authorities on their own books", "EDC and the School Construction Authority have headcount and no expenditure line. Health + Hospitals, NYCHA, and CUNY need their own financial statements beside the MMR row."],
-    ["05", "Join the efficiency scan", "Attach overtime growth and the cost-versus-outcome quadrant from the NY Efficiency project, so a card can say whether spending rose while results did not."],
+function renderCard(agency: Agency): string {
+  const facts: Array<[string, string]> = [
+    ["Authorized in the same row", money(agency.authorizedMillions)],
+    ["Positions", people(agency.positions.actual)],
+    ["Positions authorized", people(agency.positions.authorized)],
   ];
+  if (agency.overtime) facts.push(["Overtime", money(agency.overtime.millions)]);
+  if (agency.contractMillions != null) facts.push(["Human-services contracts", money(agency.contractMillions)]);
+  if (agency.capitalMillions != null) {
+    facts.push([agency.capitalLabel ?? "Capital commitments", money(agency.capitalMillions)]);
+  }
+  if (agency.revenueMillions != null) facts.push(["Revenue in this table", money(agency.revenueMillions)]);
+
+  const lines = agency.positions.lines
+    .map((line) => `${esc(line.label)} ${people(line.actual)}`)
+    .join(", ");
+
   return `
-    <section class="plan" id="plan">
-      <p class="eyebrow">How this gets better</p>
-      <h2>A first reading, then a sharper one</h2>
-      <p>These cards are the public layer: who the agency is, who it reports to, what it spent, and how many people it employs. The useful version is the one that can survive a conversation with the agency.</p>
-      <div class="plan-grid">
-        ${steps
-          .map(
-            ([num, title, body]) => `
-            <article class="plan-step">
-              <p class="plan-num">${num}</p>
-              <h3>${title}</h3>
-              <p>${body}</p>
-            </article>`,
-          )
-          .join("")}
-      </div>
-    </section>`;
+    <div class="card-top">
+      <p><span class="chip">${esc(agency.acronym)}</span><span class="where">${esc(clusterLabel(agency.portfolio))}</span></p>
+      <button class="close" type="button" data-clear aria-label="Close ${esc(agency.acronym)}">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3.5 3.5l9 9m0-9l-9 9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <h2>${esc(agency.name)}</h2>
+    <p class="lede">${esc(agency.oneLiner)}</p>
+    <div class="headline">
+      <p class="headline-label">Spent in Fiscal 2026</p>
+      <p class="headline-value">${esc(money(agency.expendituresMillions))}</p>
+    </div>
+    <dl class="facts">
+      ${facts
+        .map(
+          ([label, value]) => `<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`,
+        )
+        .join("")}
+    </dl>
+    ${lines ? `<p class="note">${lines}. ${agency.positions.note ? esc(agency.positions.note) : ""}</p>` : ""}
+    <p class="note">${esc(agency.watch)}</p>
+    <p class="note">${esc(agency.reportingNote)}</p>
+    <p class="sources">
+      <a target="_blank" rel="noopener" href="https://data.cityofnewyork.us/City-Government/Mayor-s-Management-Report-Agency-Resources/4qmi-txnk">MMR resources, FY2026</a>
+    </p>
+  `;
 }
