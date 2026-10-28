@@ -41,10 +41,14 @@ export function rampGradient(mode: Mode): string {
   return `linear-gradient(90deg, ${RAMP_STOPS.map((t) => `${rampColor(t, mode)} ${t * 100}%`).join(", ")})`;
 }
 
+export function displayMillions(agency: Agency): number | null {
+  return agency.expendituresMillions ?? agency.adoptedMillions ?? null;
+}
+
 export function orderedAgencies(agencies: Agency[]): Agency[] {
   return [...agencies].sort((a, b) => {
-    const left = a.expendituresMillions;
-    const right = b.expendituresMillions;
+    const left = displayMillions(a);
+    const right = displayMillions(b);
     if (left == null && right == null) return a.acronym.localeCompare(b.acronym);
     if (left == null) return 1;
     if (right == null) return -1;
@@ -99,8 +103,16 @@ const CLUSTER_NAME: Record<string, string> = {
   economic: "Economic justice",
   counsel: "Chief Counsel",
   staff: "Chief of Staff",
+  comms: "Communications",
   safety: "Community safety",
+  mayor: "Office of the Mayor",
 };
+
+export function markedAmount(agency: Agency): string {
+  if (agency.figure === "included") return "Not separate*";
+  if (agency.figure === "adopted") return `${moneyTile(agency.adoptedMillions)}*`;
+  return moneyTile(agency.expendituresMillions);
+}
 
 let readingOrder: Agency[] = [];
 
@@ -135,9 +147,10 @@ function renderCluster(portfolio: Portfolio, members: Agency[], agencies: Agency
 
   const tiles = members
     .map((agency, index) => {
-      const vars = toneVars(agencies, agency.expendituresMillions);
+      const shown = displayMillions(agency);
+      const vars = toneVars(agencies, agency.expendituresMillions ?? shown);
       const style = vars ? ` style="${vars}"` : "";
-      const amount = moneyTile(agency.expendituresMillions);
+      const amount = markedAmount(agency);
       return `
         <button type="button" class="tile${vars ? "" : " is-empty"}${index === 0 && (agency.expendituresMillions ?? 0) >= 10000 ? " is-major" : ""}" role="listitem" data-id="${esc(agency.id)}"
           aria-label="${esc(`${agency.acronym}, ${agency.name}, ${amount}`)}"${style}>
@@ -152,7 +165,7 @@ function renderCluster(portfolio: Portfolio, members: Agency[], agencies: Agency
       <header class="cluster-head">
         <h2>${esc(label)}</h2>
         <p class="cluster-meta">
-          ${members.length ? `<span>${count}</span><span>${esc(moneyTile(total))}</span><span>${share < 1 ? "<1" : Math.round(share)}% of city spending</span>` : ""}
+          ${members.length ? `<span>${count}</span>${total > 0 ? `<span>${esc(moneyTile(total))}</span><span>${share < 1 ? "<1" : Math.round(share)}% of city spending</span>` : ""}` : ""}
         </p>
         ${total > 0 ? `<div class="share" aria-hidden="true"><div class="share-fill" style="width:${share}%">${renderSegments(members, agencies, 2)}</div></div>` : ""}
         <p class="cluster-blurb">${esc(members.length ? portfolio.blurb : `No agency chapter of its own. ${portfolio.blurb}`)}</p>
@@ -213,8 +226,9 @@ export function bindTooltip(host: HTMLElement, agencies: Agency[]): void {
   const show = (tile: HTMLElement) => {
     const agency = agencies.find((item) => item.id === tile.dataset.id);
     if (!agency) return;
-    tip.setAttribute("style", toneVars(agencies, agency.expendituresMillions) ?? "");
-    tip.innerHTML = `<strong>${esc(agency.name)}</strong><em>${esc(moneyTile(agency.expendituresMillions))}</em><span>${esc(agency.oneLiner)}</span>`;
+    const shown = displayMillions(agency);
+    tip.setAttribute("style", toneVars(agencies, agency.expendituresMillions ?? shown) ?? "");
+    tip.innerHTML = `<strong>${esc(agency.name)}</strong><em>${esc(markedAmount(agency))}</em><span>${esc(agency.oneLiner)}</span>`;
     const box = tile.getBoundingClientRect();
     tip.classList.add("is-on");
     const width = tip.offsetWidth;

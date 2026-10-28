@@ -75,7 +75,8 @@ button {
   grid-template-areas:
     "copy total"
     "strip strip"
-    "ramp ramp";
+    "ramp ramp"
+    "note note";
   align-items: end;
   column-gap: 2rem;
 }
@@ -238,6 +239,62 @@ button {
   margin: 0 0 0 0.75rem;
   color: var(--faint);
   font-weight: 400;
+}
+
+.star-note {
+  grid-area: note;
+  margin: 0.35rem 0 0;
+  color: var(--ink);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.star-note summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  padding: 0.15rem 0;
+  list-style: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.star-note summary::-webkit-details-marker {
+  display: none;
+}
+
+.star-note summary::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-1px) rotate(-45deg);
+  transition: transform 180ms var(--ease);
+}
+
+.star-note[open] summary::before {
+  transform: translateY(1px) rotate(45deg);
+}
+
+.star-note p {
+  max-width: 40rem;
+  margin: 0.3rem 0 0 1rem;
+}
+
+@media (hover: hover) {
+  .star-note summary:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-note summary::before {
+    transition: none;
+  }
 }
 
 /* Layout */
@@ -894,7 +951,7 @@ button {
 
   .mast {
     grid-template-columns: 1fr;
-    grid-template-areas: "mode" "copy" "total" "strip" "ramp";
+    grid-template-areas: "mode" "copy" "total" "strip" "ramp" "note";
   }
 
   .mode {

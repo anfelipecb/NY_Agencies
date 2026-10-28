@@ -29,7 +29,7 @@ export function mountApp(root: HTMLElement): void {
       <header class="mast">
         <div class="mast-copy">
           <h1>New York City agencies</h1>
-          <p>Grouped by who they report to under Executive Order 23. Inside each group, the largest Fiscal 2026 expenditure comes first. Color is that amount, on one scale.</p>
+          <p>Grouped by who they report to under Executive Order 23. Inside each group, the largest Fiscal 2026 figure comes first. Color is that amount, on one scale.</p>
         </div>
         <div class="mode" role="group" aria-label="Color theme">
           <button type="button" data-mode="light">${SUN}Light</button>
@@ -46,6 +46,10 @@ export function mountApp(root: HTMLElement): void {
           <span>${moneyTile(high)}</span>
           <p>Color is spending on a log scale. Width in the bar above is spending as is.</p>
         </div>
+        <details class="star-note">
+          <summary>* What this means</summary>
+          <p>A dollar with an asterisk is the Fiscal 2026 adopted budget, not spending from the Management Report. It is not part of the ${money(totalSpend(agencies))} above, and it is not part of a group's dollar. An asterisk with no dollar means Executive Order 23 names the office and the adopted budget does not publish a separate amount. That is not zero, and it is not added to any other tile.</p>
+        </details>
       </header>
       <div class="stage-body">
         <div class="field">
@@ -92,7 +96,8 @@ export function mountApp(root: HTMLElement): void {
     stageBody.classList.toggle("has-card", Boolean(selected));
     card.hidden = !selected;
     if (selected) {
-      card.setAttribute("style", toneVars(agencies, selected.expendituresMillions, "pick", "pick-ink") ?? "");
+      const shown = selected.expendituresMillions ?? selected.adoptedMillions;
+      card.setAttribute("style", toneVars(agencies, shown, "pick", "pick-ink") ?? "");
       card.innerHTML = renderCard(selected);
     } else {
       card.innerHTML = "";
@@ -184,7 +189,7 @@ function renderColophon(funded: number): string {
         <div class="method-body">
           <section>
             <h3>Source</h3>
-            <p>Every figure comes from the agency resources table of the Fiscal ${meta.fiscalYear} ${link(SOURCES.report, "Mayor's Management Report")} (MMR), published by the Mayor's Office of Operations. The same table is on NYC Open Data as ${link(SOURCES.data, "Mayor's Management Report Agency Resources, dataset 4qmi-txnk")}. Fiscal ${meta.fiscalYear} runs ${esc(meta.window)}.</p>
+            <p>Figures on the Management Report cards come from the agency resources table of the Fiscal ${meta.fiscalYear} ${link(SOURCES.report, "Mayor's Management Report")} (MMR), published by the Mayor's Office of Operations. The same table is on NYC Open Data as ${link(SOURCES.data, "Mayor's Management Report Agency Resources, dataset 4qmi-txnk")}. Offices with no MMR chapter use the Fiscal 2026 ${link(BUDGET, "adopted expense budget")}. Fiscal ${meta.fiscalYear} runs ${esc(meta.window)}.</p>
           </section>
           <section>
             <h3>Spending</h3>
@@ -196,7 +201,7 @@ function renderColophon(funded: number): string {
           </section>
           <section>
             <h3>Reporting lines</h3>
-            <p>Groups follow ${link(SOURCES.order, esc(meta.order))}, which assigns agencies to deputy mayors and senior staff either to supervise or to keep a liaison. Each card says which. Two placements, ${inferred.join(" and ")}, are inferred from the order rather than named in it, and their cards say so. Mayor's offices without their own MMR chapter, such as the Office of Management and Budget, are not included.</p>
+            <p>Groups follow ${link(SOURCES.order, esc(meta.order))}, which assigns agencies to deputy mayors and senior staff either to supervise or to keep a liaison. Each card says which. Two placements, ${inferred.join(" and ")}, are inferred from the order rather than named in it, and their cards say so. A dollar with an asterisk is an office's own unit in the Fiscal 2026 adopted expense budget. It is not a Management Report expenditure, it is not in the ${money(totalSpend(agencies))} total, and it does not move the color scale. An asterisk with no dollar means the order names the office and the budget does not publish a separate amount. Those tiles are not given a share of the Office of the Mayor or of any other agency. Media and Entertainment is the exception with its own units, inside Technology and Innovation, and the card says that expenditure already includes them.</p>
           </section>
           <section>
             <h3>Color and size</h3>
@@ -204,7 +209,7 @@ function renderColophon(funded: number): string {
           </section>
           <section>
             <h3>Checks and limits</h3>
-            <p>When a copy of the Open Data file is available, the build script compares every figure with it and stops if any differs by more than rounding. All ${agencies.length} agencies match. ${esc(meta.disclaimer)} Agency descriptions summarize the MMR chapters and the executive order. They are written for this site and are not official text.</p>
+            <p>When a copy of the Open Data file is available, the build script compares every MMR figure with it and stops if any differs by more than rounding. The ${agencies.filter((agency) => agency.figure === "mmr").length} MMR agencies match that file. Adopted-budget amounts are the Fiscal 2026 units of appropriation in the expense budget, personal service plus other than personal service, and the full-time positions published on those units. ${esc(meta.disclaimer)} Agency descriptions summarize the public sources. They are written for this site and are not official text.</p>
           </section>
         </div>
       </details>
@@ -216,12 +221,22 @@ function renderColophon(funded: number): string {
   `;
 }
 
+const BUDGET = "https://www.nyc.gov/assets/omb/downloads/pdf/adopt25/erc6-25.pdf";
+
 function renderCard(agency: Agency): string {
-  const facts: Array<[string, string]> = [
-    ["Authorized in the same row", money(agency.authorizedMillions)],
-    ["Positions", people(agency.positions.actual)],
-    ["Positions authorized", people(agency.positions.authorized)],
-  ];
+  const adopted = agency.figure === "adopted";
+  const included = agency.figure === "included";
+  const headcount = agency.positions.actual;
+  const authorizedHeadcount = agency.positions.authorized;
+  const facts: Array<[string, string]> = included
+    ? []
+    : adopted
+      ? [["Full-time positions, adopted", people(headcount ?? 0)]]
+      : [
+          ["Authorized in the same row", money(agency.authorizedMillions)],
+          ["Positions", people(headcount ?? 0)],
+          ["Positions authorized", people(authorizedHeadcount ?? 0)],
+        ];
   if (agency.overtime) facts.push(["Overtime", money(agency.overtime.millions)]);
   if (agency.contractMillions != null) facts.push(["Human-services contracts", money(agency.contractMillions)]);
   if (agency.capitalMillions != null) {
@@ -243,8 +258,8 @@ function renderCard(agency: Agency): string {
     <h2>${esc(agency.name)}</h2>
     <p class="lede">${esc(agency.oneLiner)}</p>
     <div class="headline">
-      <p class="headline-label">Spent in Fiscal 2026</p>
-      <p class="headline-value">${esc(money(agency.expendituresMillions))}</p>
+      <p class="headline-label">${included ? "Not published separately*" : adopted ? "Adopted budget, FY2026*" : "Spent in Fiscal 2026"}</p>
+      <p class="headline-value">${esc(included ? "No separate amount" : money(adopted ? agency.adoptedMillions : agency.expendituresMillions))}</p>
     </div>
     <dl class="facts">
       ${facts
@@ -257,7 +272,7 @@ function renderCard(agency: Agency): string {
     <p class="note">${esc(agency.watch)}</p>
     <p class="note">${esc(agency.reportingNote)}</p>
     <p class="sources">
-      <a target="_blank" rel="noopener" href="https://data.cityofnewyork.us/City-Government/Mayor-s-Management-Report-Agency-Resources/4qmi-txnk">MMR resources, FY2026</a>
+      <a target="_blank" rel="noopener" href="${adopted || included ? BUDGET : "https://data.cityofnewyork.us/City-Government/Mayor-s-Management-Report-Agency-Resources/4qmi-txnk"}">${adopted || included ? "Adopted expense budget, FY2026" : "MMR resources, FY2026"}</a>
     </p>
   `;
 }
